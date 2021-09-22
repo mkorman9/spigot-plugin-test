@@ -4,6 +4,6 @@ author: Michal
 main: com.github.mkorman9.spigotplugintest.Entrypoint
 api-version: 1.17
 commands:
-  szynka:
-    description: :D
-    usage: /szynka
+  schedulepoweroff:
+    description: Stops server and shuts down the machine once all players log out
+    usage: /schedulepoweroff
