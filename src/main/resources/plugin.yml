@@ -1,0 +1,9 @@
+name: spigot-plugin-test
+version: 1.0.0
+author: Michal
+main: com.github.mkorman9.spigotplugintest.Entrypoint
+api-version: 1.17
+commands:
+  szynka:
+    description: :D
+    usage: /szynka
