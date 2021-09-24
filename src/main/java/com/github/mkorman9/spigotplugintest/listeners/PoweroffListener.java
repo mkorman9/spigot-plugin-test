@@ -1,7 +1,7 @@
 package com.github.mkorman9.spigotplugintest.listeners;
 
 import com.github.mkorman9.spigotplugintest.Entrypoint;
-import com.github.mkorman9.spigotplugintest.events.PoweroffAtTimeEvent;
+import com.github.mkorman9.spigotplugintest.events.PoweroffInEvent;
 import com.github.mkorman9.spigotplugintest.events.PoweroffWhenEmptyEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
@@ -45,12 +45,12 @@ public class PoweroffListener implements Listener, EventExecutor {
             this.handlePlayerDisconnect((PlayerQuitEvent) event);
         }
 
-        if (event instanceof PoweroffAtTimeEvent) {
-            if (((PoweroffAtTimeEvent) event).isCancelled()) {
+        if (event instanceof PoweroffInEvent) {
+            if (((PoweroffInEvent) event).isCancelled()) {
                 return;
             }
 
-            this.schedulePoweroffAtTime((PoweroffAtTimeEvent) event);
+            this.schedulePoweroffIn((PoweroffInEvent) event);
         }
     }
 
@@ -63,7 +63,7 @@ public class PoweroffListener implements Listener, EventExecutor {
         poweroffWhenEmpty = true;
     }
 
-    private void schedulePoweroffAtTime(PoweroffAtTimeEvent event) {
+    private void schedulePoweroffIn(PoweroffInEvent event) {
         if (poweroffAtTimeTask != null && !poweroffAtTimeTask.isCancelled()) {
             poweroffAtTimeWarningTask.cancel();
             poweroffAtTimeWarningTask = null;

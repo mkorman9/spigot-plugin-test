@@ -4,13 +4,13 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-public class PoweroffAtTimeEvent extends Event implements Cancellable {
+public class PoweroffInEvent extends Event implements Cancellable {
     private static final HandlerList handlers = new HandlerList();
 
     private final int minutes;
     private boolean cancel = false;
 
-    public PoweroffAtTimeEvent(int minutes) {
+    public PoweroffInEvent(int minutes) {
         this.minutes = minutes;
     }
 

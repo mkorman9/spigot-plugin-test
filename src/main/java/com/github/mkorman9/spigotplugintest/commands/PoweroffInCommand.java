@@ -1,15 +1,15 @@
 package com.github.mkorman9.spigotplugintest.commands;
 
 import com.github.mkorman9.spigotplugintest.Entrypoint;
-import com.github.mkorman9.spigotplugintest.events.PoweroffAtTimeEvent;
+import com.github.mkorman9.spigotplugintest.events.PoweroffInEvent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 
-public class PoweroffAtTimeCommand implements CommandExecutor {
+public class PoweroffInCommand implements CommandExecutor {
     private final Entrypoint entrypoint;
 
-    public PoweroffAtTimeCommand(Entrypoint entrypoint) {
+    public PoweroffInCommand(Entrypoint entrypoint) {
         this.entrypoint = entrypoint;
     }
 
@@ -20,7 +20,7 @@ public class PoweroffAtTimeCommand implements CommandExecutor {
             return false;
         }
 
-        entrypoint.getServer().getPluginManager().callEvent(new PoweroffAtTimeEvent(minutes));
+        entrypoint.getServer().getPluginManager().callEvent(new PoweroffInEvent(minutes));
         return true;
     }
 

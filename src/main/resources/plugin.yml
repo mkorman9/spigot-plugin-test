@@ -11,11 +11,15 @@ commands:
     usage: /poweroffwhenempty
     permission: utilityplugin.poweroff
     permission-message: You do not have the required permissions to execute this command
-  poweroffattime:
+    aliases:
+      - powe
+  poweroffin:
     description: Stops server and shuts down the machine at specific time
-    usage: /poweroffattime <minutes>
+    usage: /poweroffin <minutes>
     permission: utilityplugin.poweroff
     permission-message: You do not have the required permissions to execute this command
+    aliases:
+      - poi
 
 permissions:
   utilityplugin.poweroff:
