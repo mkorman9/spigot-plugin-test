@@ -2,7 +2,6 @@ package com.github.mkorman9.spigotplugintest.commands;
 
 import com.github.mkorman9.spigotplugintest.Entrypoint;
 import com.github.mkorman9.spigotplugintest.events.PoweroffAtTimeEvent;
-import com.github.mkorman9.spigotplugintest.events.PoweroffWhenEmptyEvent;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

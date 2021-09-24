@@ -1,5 +1,6 @@
-package com.github.mkorman9.spigotplugintest;
+package com.github.mkorman9.spigotplugintest.listeners;
 
+import com.github.mkorman9.spigotplugintest.Entrypoint;
 import com.github.mkorman9.spigotplugintest.events.PoweroffAtTimeEvent;
 import com.github.mkorman9.spigotplugintest.events.PoweroffWhenEmptyEvent;
 import org.bukkit.entity.Player;
@@ -8,6 +9,7 @@ import org.bukkit.event.EventException;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.EventExecutor;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -18,6 +20,8 @@ public class PoweroffListener implements Listener, EventExecutor {
     private final Entrypoint entrypoint;
 
     private boolean poweroffWhenEmpty = false;
+    private BukkitTask poweroffAtTimeWarningTask = null;
+    private BukkitTask poweroffAtTimeTask = null;
 
     public PoweroffListener(Entrypoint entrypoint) {
         this.entrypoint = entrypoint;
@@ -51,13 +55,36 @@ public class PoweroffListener implements Listener, EventExecutor {
     }
 
     private void schedulePoweroffWhenEmpty(PoweroffWhenEmptyEvent event) {
+        if (poweroffWhenEmpty) {
+            return;
+        }
+
         entrypoint.getServer().broadcastMessage("Server will shut down once all the players are disconnected");
-        this.poweroffWhenEmpty = true;
+        poweroffWhenEmpty = true;
     }
 
     private void schedulePoweroffAtTime(PoweroffAtTimeEvent event) {
+        if (poweroffAtTimeTask != null && !poweroffAtTimeTask.isCancelled()) {
+            poweroffAtTimeWarningTask.cancel();
+            poweroffAtTimeWarningTask = null;
+
+            poweroffAtTimeTask.cancel();
+            poweroffAtTimeTask = null;
+        }
+
         entrypoint.getServer().broadcastMessage(String.format("Server will automatically shut down in %d minutes", event.getMinutes()));
-        entrypoint.getServer().getScheduler().runTaskLater(entrypoint, this::executePoweroff, event.getMinutes() * 60 * 20);
+
+        long ticksUntilPoweroff = event.getMinutes() * 60 * 20;
+        poweroffAtTimeWarningTask = entrypoint.getServer().getScheduler().runTaskLater(
+                entrypoint,
+                () -> entrypoint.getServer().broadcastMessage("[WARNING] Server shutting down in 30 seconds"),
+                ticksUntilPoweroff - (30 * 20)
+        );
+        poweroffAtTimeTask = entrypoint.getServer().getScheduler().runTaskLater(
+                entrypoint,
+                this::executePoweroff,
+                ticksUntilPoweroff
+        );
     }
 
     private void handlePlayerDisconnect(PlayerQuitEvent event) {

@@ -4,6 +4,8 @@ import com.github.mkorman9.spigotplugintest.commands.PoweroffAtTimeCommand;
 import com.github.mkorman9.spigotplugintest.commands.PoweroffWhenEmptyCommand;
 import com.github.mkorman9.spigotplugintest.events.PoweroffAtTimeEvent;
 import com.github.mkorman9.spigotplugintest.events.PoweroffWhenEmptyEvent;
+import com.github.mkorman9.spigotplugintest.listeners.ChatListener;
+import com.github.mkorman9.spigotplugintest.listeners.PoweroffListener;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;

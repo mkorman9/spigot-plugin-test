@@ -1,5 +1,6 @@
-package com.github.mkorman9.spigotplugintest;
+package com.github.mkorman9.spigotplugintest.listeners;
 
+import com.github.mkorman9.spigotplugintest.Entrypoint;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.event.Event;
