@@ -118,9 +118,11 @@ public class PoweroffListener implements Listener, EventExecutor {
         }
 
         Collection<? extends Player> playersOnline = entrypoint.getServer().getOnlinePlayers();
-        if (playersOnline.isEmpty() ||
-                (playersOnline.size() == 1 &&
-                        playersOnline.iterator().next().getUniqueId() == event.getPlayer().getUniqueId())) {
+        boolean isServerEmpty = playersOnline.isEmpty();
+        boolean hasLastPlayerDisconnected = (playersOnline.size() == 1 &&
+                playersOnline.iterator().next().getUniqueId().equals(event.getPlayer().getUniqueId()));
+
+        if (isServerEmpty || hasLastPlayerDisconnected) {
             executePoweroff();
         }
     }
