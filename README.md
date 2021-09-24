@@ -29,11 +29,22 @@ wget https://ci.lucko.me/job/LuckPerms/1367/artifact/bukkit/loader/build/libs/Lu
 ```
 lp group default permission set luckperms.* false
 
+lp creategroup mod
+lp group mod permission set minecraft.command.* true
+lp group mod permission set bukkit.command.* true
+lp group mod permission set minecraft.command.stop false
+lp group mod permission set bukkit.command.stop false
+lp group mod parent add default
+
 lp creategroup admin
 lp group admin permission set luckperms.* true
 lp group admin permission set spligotplugintest.poweroff true
+lp group admin permission set minecraft.command.stop true
+lp group admin permission set bukkit.command.stop true
+lp group admin parent add mod
 ```
 - Assign yourself to `admin` group
 ```
 lp user <YOUR_USERNAME> parent add admin
 ```
+- Restart server
