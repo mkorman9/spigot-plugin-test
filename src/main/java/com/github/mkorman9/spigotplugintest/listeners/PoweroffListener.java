@@ -1,6 +1,7 @@
 package com.github.mkorman9.spigotplugintest.listeners;
 
 import com.github.mkorman9.spigotplugintest.Entrypoint;
+import com.github.mkorman9.spigotplugintest.events.PoweroffCancelEvent;
 import com.github.mkorman9.spigotplugintest.events.PoweroffInEvent;
 import com.github.mkorman9.spigotplugintest.events.PoweroffWhenEmptyEvent;
 import org.bukkit.entity.Player;
@@ -52,6 +53,14 @@ public class PoweroffListener implements Listener, EventExecutor {
 
             this.schedulePoweroffIn((PoweroffInEvent) event);
         }
+
+        if (event instanceof PoweroffCancelEvent) {
+            if (((PoweroffCancelEvent) event).isCancelled()) {
+                return;
+            }
+
+            this.cancelPoweroff((PoweroffCancelEvent) event);
+        }
     }
 
     private void schedulePoweroffWhenEmpty(PoweroffWhenEmptyEvent event) {
@@ -64,10 +73,11 @@ public class PoweroffListener implements Listener, EventExecutor {
     }
 
     private void schedulePoweroffIn(PoweroffInEvent event) {
-        if (poweroffAtTimeTask != null && !poweroffAtTimeTask.isCancelled()) {
+        if (poweroffAtTimeWarningTask != null && !poweroffAtTimeWarningTask.isCancelled()) {
             poweroffAtTimeWarningTask.cancel();
             poweroffAtTimeWarningTask = null;
-
+        }
+        if (poweroffAtTimeTask != null && !poweroffAtTimeTask.isCancelled()) {
             poweroffAtTimeTask.cancel();
             poweroffAtTimeTask = null;
         }
@@ -85,6 +95,21 @@ public class PoweroffListener implements Listener, EventExecutor {
                 this::executePoweroff,
                 ticksUntilPoweroff
         );
+    }
+
+    private void cancelPoweroff(PoweroffCancelEvent event) {
+        poweroffWhenEmpty = false;
+
+        if (poweroffAtTimeWarningTask != null && !poweroffAtTimeWarningTask.isCancelled()) {
+            poweroffAtTimeWarningTask.cancel();
+            poweroffAtTimeWarningTask = null;
+        }
+        if (poweroffAtTimeTask != null && !poweroffAtTimeTask.isCancelled()) {
+            poweroffAtTimeTask.cancel();
+            poweroffAtTimeTask = null;
+        }
+
+        entrypoint.getServer().broadcastMessage("Automatic server shut down has been cancelled");
     }
 
     private void handlePlayerDisconnect(PlayerQuitEvent event) {

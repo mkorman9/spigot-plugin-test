@@ -20,6 +20,13 @@ commands:
     permission-message: You do not have the required permissions to execute this command
     aliases:
       - poi
+  poweroffcancel:
+    description: Cancels all scheduled power off triggers
+    usage: /poweroffcancel <minutes>
+    permission: utilityplugin.poweroff
+    permission-message: You do not have the required permissions to execute this command
+    aliases:
+      - poc
 
 permissions:
   utilityplugin.poweroff:

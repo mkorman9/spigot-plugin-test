@@ -1,7 +1,9 @@
 package com.github.mkorman9.spigotplugintest;
 
+import com.github.mkorman9.spigotplugintest.commands.PoweroffCancelCommand;
 import com.github.mkorman9.spigotplugintest.commands.PoweroffInCommand;
 import com.github.mkorman9.spigotplugintest.commands.PoweroffWhenEmptyCommand;
+import com.github.mkorman9.spigotplugintest.events.PoweroffCancelEvent;
 import com.github.mkorman9.spigotplugintest.events.PoweroffInEvent;
 import com.github.mkorman9.spigotplugintest.events.PoweroffWhenEmptyEvent;
 import com.github.mkorman9.spigotplugintest.listeners.ChatListener;
@@ -18,6 +20,7 @@ public class Entrypoint extends JavaPlugin {
 
         this.getCommand("poweroffwhenempty").setExecutor(new PoweroffWhenEmptyCommand(this));
         this.getCommand("poweroffin").setExecutor(new PoweroffInCommand(this));
+        this.getCommand("poweroffcancel").setExecutor(new PoweroffCancelCommand(this));
 
         ChatListener chatListener = new ChatListener(this);
         this.getServer().getPluginManager().registerEvents(chatListener, this);
@@ -50,6 +53,14 @@ public class Entrypoint extends JavaPlugin {
         );
         this.getServer().getPluginManager().registerEvent(
                 PoweroffInEvent.class,
+                poweroffEventListener,
+                EventPriority.HIGH,
+                poweroffEventListener,
+                this,
+                true
+        );
+        this.getServer().getPluginManager().registerEvent(
+                PoweroffCancelEvent.class,
                 poweroffEventListener,
                 EventPriority.HIGH,
                 poweroffEventListener,
