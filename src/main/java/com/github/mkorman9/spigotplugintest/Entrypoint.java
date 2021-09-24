@@ -14,7 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class Entrypoint extends JavaPlugin {
     @Override
     public void onEnable() {
-        this.getLogger().info("Started spigot-plugin-test");
+        this.getLogger().info("Started utility-plugin");
 
         this.getCommand("poweroffwhenempty").setExecutor(new PoweroffWhenEmptyCommand(this));
         this.getCommand("poweroffattime").setExecutor(new PoweroffAtTimeCommand(this));
@@ -60,6 +60,6 @@ public class Entrypoint extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        this.getLogger().info("Stopped spigot-plugin-test");
+        this.getLogger().info("Stopped utility-plugin");
     }
 }

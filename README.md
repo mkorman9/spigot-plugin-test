@@ -34,13 +34,21 @@ lp group mod permission set minecraft.command.* true
 lp group mod permission set bukkit.command.* true
 lp group mod permission set minecraft.command.stop false
 lp group mod permission set bukkit.command.stop false
+lp group mod permission set minecraft.command.op false
+lp group mod permission set bukkit.command.op false
+lp group mod permission set minecraft.command.deop false
+lp group mod permission set bukkit.command.deop false
 lp group mod parent add default
 
 lp creategroup admin
 lp group admin permission set luckperms.* true
-lp group admin permission set spligotplugintest.poweroff true
+lp group admin permission set utilityplugin.poweroff true
 lp group admin permission set minecraft.command.stop true
 lp group admin permission set bukkit.command.stop true
+lp group admin permission set minecraft.command.op true
+lp group admin permission set bukkit.command.op true
+lp group admin permission set minecraft.command.deop true
+lp group admin permission set bukkit.command.deop true
 lp group admin parent add mod
 ```
 - Assign yourself to `admin` group

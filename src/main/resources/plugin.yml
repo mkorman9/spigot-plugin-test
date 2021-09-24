@@ -1,5 +1,6 @@
-name: spigot-plugin-test
+name: utility-plugin
 version: 1.0.0
+description: Simple plugin providing basic utilities for server management
 author: Michal
 main: com.github.mkorman9.spigotplugintest.Entrypoint
 api-version: 1.17
@@ -8,15 +9,15 @@ commands:
   poweroffwhenempty:
     description: Stops server and shuts down the machine once all players log out
     usage: /poweroffwhenempty
-    permission: spligotplugintest.poweroff
+    permission: utilityplugin.poweroff
     permission-message: You do not have the required permissions to execute this command
   poweroffattime:
     description: Stops server and shuts down the machine at specific time
     usage: /poweroffattime <minutes>
-    permission: spligotplugintest.poweroff
+    permission: utilityplugin.poweroff
     permission-message: You do not have the required permissions to execute this command
 
 permissions:
-  spligotplugintest.poweroff:
+  utilityplugin.poweroff:
     description: Allows to execute poweroff related commands
     default: false
