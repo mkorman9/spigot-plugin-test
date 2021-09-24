@@ -9,5 +9,6 @@ do
       sleep 5
   else
       sudo poweroff
+      exit
   fi
 done
