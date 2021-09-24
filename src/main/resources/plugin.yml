@@ -4,6 +4,9 @@ author: Michal
 main: com.github.mkorman9.spigotplugintest.Entrypoint
 api-version: 1.17
 commands:
-  schedulepoweroff:
+  poweroffwhenempty:
     description: Stops server and shuts down the machine once all players log out
-    usage: /schedulepoweroff
+    usage: /poweroffwhenempty
+  poweroffattime:
+    description: Stops server and shuts down the machine at specific time
+    usage: /poweroffattime <minutes>

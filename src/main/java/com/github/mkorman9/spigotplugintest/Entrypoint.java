@@ -1,5 +1,9 @@
 package com.github.mkorman9.spigotplugintest;
 
+import com.github.mkorman9.spigotplugintest.commands.PoweroffAtTimeCommand;
+import com.github.mkorman9.spigotplugintest.commands.PoweroffWhenEmptyCommand;
+import com.github.mkorman9.spigotplugintest.events.PoweroffAtTimeEvent;
+import com.github.mkorman9.spigotplugintest.events.PoweroffWhenEmptyEvent;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -10,7 +14,8 @@ public class Entrypoint extends JavaPlugin {
     public void onEnable() {
         this.getLogger().info("Started spigot-plugin-test");
 
-        this.getCommand("schedulepoweroff").setExecutor(new SchedulePoweroffCommand(this));
+        this.getCommand("poweroffwhenempty").setExecutor(new PoweroffWhenEmptyCommand(this));
+        this.getCommand("poweroffattime").setExecutor(new PoweroffAtTimeCommand(this));
 
         ChatListener chatListener = new ChatListener(this);
         this.getServer().getPluginManager().registerEvents(chatListener, this);
@@ -26,7 +31,7 @@ public class Entrypoint extends JavaPlugin {
         PoweroffListener poweroffEventListener = new PoweroffListener(this);
         this.getServer().getPluginManager().registerEvents(poweroffEventListener, this);
         this.getServer().getPluginManager().registerEvent(
-                SchedulePoweroffEvent.class,
+                PoweroffWhenEmptyEvent.class,
                 poweroffEventListener,
                 EventPriority.HIGH,
                 poweroffEventListener,
@@ -37,6 +42,14 @@ public class Entrypoint extends JavaPlugin {
                 PlayerQuitEvent.class,
                 poweroffEventListener,
                 EventPriority.LOWEST,
+                poweroffEventListener,
+                this,
+                true
+        );
+        this.getServer().getPluginManager().registerEvent(
+                PoweroffAtTimeEvent.class,
+                poweroffEventListener,
+                EventPriority.HIGH,
                 poweroffEventListener,
                 this,
                 true
