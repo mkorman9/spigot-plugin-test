@@ -31,4 +31,4 @@ commands:
 permissions:
   utilityplugin.poweroff:
     description: Allows to execute poweroff related commands
-    default: false
+    default: op
