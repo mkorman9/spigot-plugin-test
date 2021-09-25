@@ -28,6 +28,10 @@ commands:
     aliases:
       - poc
 
+  villagers:
+    description: Counts the villagers in the radius of 8 chunks
+    usage: /villagers
+
 permissions:
   utilityplugin.poweroff:
     description: Allows to execute poweroff related commands
